@@ -27,7 +27,7 @@ func main() {
 	fmt.Scanf ("%d", &comando)
 	// Scan é mais inteligente e não precisa do modificador
 	fmt.Scan(&comandos)
-	
+
 	fmt.Println("O endereço da variável comando é", &comando)
 	fmt.Println("O endereço da variável comando é", &comandos)
 
@@ -35,3 +35,4 @@ func main() {
 }
 
 
+// git ls-files (para saber qual arquivos o git está controlando)
