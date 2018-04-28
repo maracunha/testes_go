@@ -1,10 +1,10 @@
 // _ é um operador de variavel em branco
-	//nome, idade := devolveNomeIdade()    (assim eu uso todas as variáveis)
-	//fmt.Println("Meu nome é", nome)
-	//fmt.Println("Minha idade é", idade)
+//nome, idade := devolveNomeIdade()    (assim eu uso todas as variáveis)
+//fmt.Println("Meu nome é", nome)
+//fmt.Println("Minha idade é", idade)
 
- 	//_, idade := devolveNomeIdade()    // caso não queira usar alguma, é só usar o _ para ficar em branco
-	//fmt.Println("Minha idade é", idade)
+//_, idade := devolveNomeIdade()    // caso não queira usar alguma, é só usar o _ para ficar em branco
+//fmt.Println("Minha idade é", idade)
 
 // para retornar mais de uma varial, devo colcoar o que será retornado entre ()
 //func devolveNomeIdade() (string, int) {
@@ -12,9 +12,7 @@
 //	idade := 24
 //	return nome, idade
 // for {  (sem passar nenhum parametro, ele fico em loop infinito.. em go não existe while)
-//} 
-
-
+//}
 
 package main
 
@@ -25,25 +23,26 @@ import "net/http"
 
 func main() {
 
-
 	exibeIntrodução()
-	exibeMenu()
 
-	comando := leComando()
+	for {
+		exibeMenu()
 
-	switch comando {
-	case 1:
-		iniciarMonitoramento()
-	case 2:
-		fmt.Println("Exibindo Log...")
-	case 0:
-		fmt.Println("Saindo do programa")
-		os.Exit(0)
-	default:
-		fmt.Println("Não conheço este comando")
-		os.Exit(-1)
+		comando := leComando()
+
+		switch comando {
+		case 1:
+			iniciarMonitoramento()
+		case 2:
+			fmt.Println("Exibindo Log...")
+		case 0:
+			fmt.Println("Saindo do programa")
+			os.Exit(0)
+		default:
+			fmt.Println("Não conheço este comando")
+			os.Exit(-1)
+		}
 	}
-
 }
 
 func exibeIntrodução() {
@@ -71,7 +70,12 @@ func leComando() int {
 
 func iniciarMonitoramento() {
 	fmt.Println("Monitorando...")
-	site := "https://www.alura.com.br"
+	site := "https://random-status-code.herokuapp.com"
 	resp, _ := http.Get(site)
-	fmt.Println(resp)
+	if resp.StatusCode == 200 {
+		fmt.Println("Site", site, "foi carregado corretamente!")
+	} else {
+		fmt.Println("Site", site, "está com problema. Status Code:", resp.StatusCode)
+	}
+
 }
