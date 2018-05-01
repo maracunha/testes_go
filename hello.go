@@ -4,18 +4,14 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"reflect"
 )
 
 func main() {
 
-	exibeNomes()  // Slice
-	exibeCarros() // Array
-
-	//exibeIntrodução()
+	exibeIntrodução()
 
 	for {
-		//	exibeMenu()
+		exibeMenu()
 
 		comando := leComando()
 
@@ -60,6 +56,12 @@ func leComando() int {
 
 func iniciarMonitoramento() {
 	fmt.Println("Monitorando...")
+	sites := []string {"https://random-status-code.herokuapp.com", "https://www.alura.com.br", "https://www.caelum.com.br"}
+	
+	for i:= 0 ; i < len(sites) ; i++ {  // for tradicional 
+		fmt.Println(sites[i])
+	}
+	
 	site := "https://random-status-code.herokuapp.com"
 	resp, _ := http.Get(site)
 	if resp.StatusCode == 200 {
@@ -67,33 +69,4 @@ func iniciarMonitoramento() {
 	} else {
 		fmt.Println("Site", site, "está com problema. Status Code:", resp.StatusCode)
 	}
-}
-
-func exibeNomes() {
-	nomes := []string{"Doulgas", "Mario", "Bernado"}
-	fmt.Println(nomes)
-	fmt.Println(reflect.TypeOf(nomes))                                  // para saber o tipo de "nome"
-	fmt.Println("O meu slice tem", len(nomes), "itens")                 // LEN para saber o tamnaho do array
-	fmt.Println("O meu slice tem capacidade para", cap(nomes), "itens") // CAP para saber a capacidade do array
-
-	fmt.Println()
-	nomes = append(nomes, "Aparecida")
-
-	fmt.Println(nomes)
-	fmt.Println(reflect.TypeOf(nomes))
-	fmt.Println("O meu slice tem", len(nomes), "itens")
-	fmt.Println("O meu slice tem capacidade para", cap(nomes), "itens")
-}
-
-func exibeCarros() {
-	var carros [4]string
-	carros[0] = "chevete"
-	carros[1] = "civic"
-	carros[2] = "celta"
-
-	fmt.Println()
-	fmt.Println(carros)
-	fmt.Println(reflect.TypeOf(carros))
-	fmt.Println("O meu array tem", len(carros), "itens")
-	fmt.Println("O meu array tem capacidade para", cap(carros), "itens")
 }
