@@ -4,7 +4,11 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 )
+
+const monitoramento = 3 // crio constantes para usar em go
+const delay = 5
 
 func main() {
 
@@ -33,11 +37,13 @@ func main() {
 
 func exibeIntrodução() {
 
+	fmt.Println("")
 	nome := "Gullas"
 	idade := 24
 	versao := 1.1
 	fmt.Println("Olá sr.", nome, "sua idade é", idade)
 	fmt.Println("Este programa está na versão", versao)
+	fmt.Println("")
 }
 
 func exibeMenu() {
@@ -55,14 +61,24 @@ func leComando() int {
 }
 
 func iniciarMonitoramento() {
+
 	fmt.Println("Monitorando...")
-	sites := []string {"https://random-status-code.herokuapp.com", "https://www.alura.com.br", "https://www.caelum.com.br"}
-	
-	for i, site := range sites {  // RANGE retorno a posição i(indice) e quem está nessa posição, site0
-		fmt.Println("Estou passano na possição", i,":", site)
+	fmt.Println("")
+	sites := []string{"https://random-status-code.herokuapp.com", "https://www.alura.com.br", "https://www.caelum.com.br"}
+
+	for i := 0; i < monitoramento; i++ {
+		for i, site := range sites { // RANGE retorno a posição i(indice) e quem está nessa posição, site0
+			fmt.Println("Estou passano na possição", i, ":", site)
+			testaSite(site)
+			fmt.Println("")
+		}
+		time.Sleep(delay * time.Second)
 	}
-	
-	site := "https://random-status-code.herokuapp.com"
+
+	fmt.Println("")
+}
+
+func testaSite(site string) {
 	resp, _ := http.Get(site)
 	if resp.StatusCode == 200 {
 		fmt.Println("Site", site, "foi carregado corretamente!")
