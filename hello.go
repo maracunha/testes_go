@@ -58,8 +58,8 @@ func iniciarMonitoramento() {
 	fmt.Println("Monitorando...")
 	sites := []string {"https://random-status-code.herokuapp.com", "https://www.alura.com.br", "https://www.caelum.com.br"}
 	
-	for i:= 0 ; i < len(sites) ; i++ {  // for tradicional 
-		fmt.Println(sites[i])
+	for i, site := range sites {  // RANGE retorno a posição i(indice) e quem está nessa posição, site0
+		fmt.Println("Estou passano na possição", i,":", site)
 	}
 	
 	site := "https://random-status-code.herokuapp.com"
