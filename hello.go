@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"time"
+	"bufio"
 )
 
 const monitoramento = 3 // crio constantes para usar em go
@@ -13,6 +15,7 @@ const delay = 5
 func main() {
 
 	exibeIntrodução()
+	leSitesDoArquivo()
 
 	for {
 		exibeMenu()
@@ -64,7 +67,8 @@ func iniciarMonitoramento() {
 
 	fmt.Println("Monitorando...")
 	fmt.Println("")
-	sites := []string{"https://random-status-code.herokuapp.com", "https://www.alura.com.br", "https://www.caelum.com.br"}
+
+	sites := leSitesDoArquivo()
 
 	for i := 0; i < monitoramento; i++ {
 		for i, site := range sites { // RANGE retorno a posição i(indice) e quem está nessa posição, site0
@@ -79,10 +83,36 @@ func iniciarMonitoramento() {
 }
 
 func testaSite(site string) {
-	resp, _ := http.Get(site)
+	resp, err := http.Get(site)
+	if err != nil {
+		fmt.Println("Ocorreu um erro:", err)
+	}
 	if resp.StatusCode == 200 {
 		fmt.Println("Site", site, "foi carregado corretamente!")
 	} else {
 		fmt.Println("Site", site, "está com problema. Status Code:", resp.StatusCode)
 	}
 }
+
+func leSitesDoArquivo() []string {
+
+	var sites []string
+
+	//	arquivo, err := os.Open("sites.txt")
+
+	arquivo, err := ioutil.ReadFile("sites.txt") 
+
+	if err != nil {
+		fmt.Println("Ocorreu um erro:", err)
+	}
+
+	fmt.Println(string(arquivo)) // tem que colocar o string para converter o array de bytes para string (legivel)
+
+	return sites
+}
+
+// err - tratando os erro
+// os.Open (para abri um arquivo externo) - abre um ponteiro puro.
+// Biblioteca "io/ioutil"
+// arquivo, err := ioutil (retorna um array de bytes) que podemos converter em string e abrir o arquivo todo.
+// "bufio" biblioteca / 
