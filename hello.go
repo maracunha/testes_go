@@ -110,9 +110,3 @@ func leSitesDoArquivo() []string {
 
 	return sites
 }
-
-// err - tratando os erro
-// os.Open (para abri um arquivo externo) - abre um ponteiro puro.
-// Biblioteca "io/ioutil"
-// arquivo, err := ioutil (retorna um array de bytes) que podemos converter em string e abrir o arquivo todo.
-// "bufio" biblioteca / 
