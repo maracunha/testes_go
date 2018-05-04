@@ -1,12 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"time"
-	"bufio"
 )
 
 const monitoramento = 3 // crio constantes para usar em go
@@ -98,15 +97,22 @@ func leSitesDoArquivo() []string {
 
 	var sites []string
 
-	//	arquivo, err := os.Open("sites.txt")
-
-	arquivo, err := ioutil.ReadFile("sites.txt") 
+	arquivo, err := os.Open("sites.txt")
 
 	if err != nil {
 		fmt.Println("Ocorreu um erro:", err)
 	}
 
-	fmt.Println(string(arquivo)) // tem que colocar o string para converter o array de bytes para string (legivel)
+	leitor := bufio.NewReader(arquivo)
+
+	linha, err := leitor.ReadString('\n')
+	if err != nil {
+		fmt.Println("Ocorreu um erro:", err)
+	}
+
+	fmt.Println(linha)
 
 	return sites
 }
+
+//bufio
