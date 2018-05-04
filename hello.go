@@ -3,8 +3,10 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -105,14 +107,20 @@ func leSitesDoArquivo() []string {
 
 	leitor := bufio.NewReader(arquivo)
 
-	linha, err := leitor.ReadString('\n')
-	if err != nil {
-		fmt.Println("Ocorreu um erro:", err)
+	for {
+		linha, err := leitor.ReadString('\n')
+		linha = strings.TrimSpace(linha)
+
+		sites = append(sites, linha)
+
+		if err == io.EOF {
+			break
+		}
 	}
 
-	fmt.Println(linha)
+	arquivo.Close()
 
 	return sites
 }
 
-//bufio
+// "lendo múltiplas linhas, função cortar linhas e espaços, arquivo.close"
