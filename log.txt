@@ -1,0 +1,12 @@
+04/05/2018 15:56:02 - https://random-status-code.herokuapp.com - online: true
+04/05/2018 15:56:03 - https://www.alura.com.br - online: true
+04/05/2018 15:56:04 - https://www.caelum.com.br - online: true
+04/05/2018 15:56:05 - https://www.hiplatform.com - online: true
+04/05/2018 15:56:10 - https://random-status-code.herokuapp.com - online: true
+04/05/2018 15:56:10 - https://www.alura.com.br - online: true
+04/05/2018 15:56:11 - https://www.caelum.com.br - online: true
+04/05/2018 15:56:12 - https://www.hiplatform.com - online: true
+04/05/2018 15:56:17 - https://random-status-code.herokuapp.com - online: false
+04/05/2018 15:56:18 - https://www.alura.com.br - online: true
+04/05/2018 15:56:18 - https://www.caelum.com.br - online: true
+04/05/2018 15:56:19 - https://www.hiplatform.com - online: true
